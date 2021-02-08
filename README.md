@@ -13,9 +13,13 @@
 - [ ] Support for converting from all Classic varints
 - [ ] Support for converting to Release 1.12 or 1.13 format
 
-## Version of this software
+## How To Use (UI)
 
-* v0.1.0
+Coming Soon.
+
+## How To Use (Command Line)
+
+Coming Soon.
 
 ## Minimum Java
 
@@ -30,4 +34,5 @@ Currently this program can only be ran in a IDE as I have not added a UI yet onc
 
 # Screen Shots
 
-Coming Soon.
+### First Converted Indev World
+![First Converted Indev World](https://user-images.githubusercontent.com/18742837/107288124-da7a9680-6a5a-11eb-9904-46df76eef457.png)
