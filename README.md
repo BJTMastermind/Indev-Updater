@@ -21,7 +21,7 @@ Coming Soon.
 
 Coming Soon.
 
-## Minimum Java
+## Minimum Java Version
 
 * Java 8 
 
@@ -32,7 +32,10 @@ by the game its self with out having to do anything tricky with MCEdit.
 
 Currently this program can only be ran in a IDE as I have not added a UI yet once the base function of the program is complete I will add that.
 
+This Project Uses [Simple-NBT](https://github.com/BJTMastermind/simple-nbt) to read and write files.
+
 # Screen Shots
 
 ### First Converted Indev World
 ![First Converted Indev World](https://user-images.githubusercontent.com/18742837/107288124-da7a9680-6a5a-11eb-9904-46df76eef457.png)
+
