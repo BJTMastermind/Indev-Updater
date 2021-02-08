@@ -4,6 +4,11 @@
 
 ## Plan To Add / To Do
 
+- [ ] Convert Entities
+- [ ] Convert Tile Entities
+- [ ] Create "BlockLight" Byte Array
+- [ ] Create "HeightMap" Byte Array
+- [ ] Create "SkyLight" Byte Array
 - [ ] Support for converting from Pre-Classic
 - [ ] Support for converting from all Classic varints
 - [ ] Support for converting to Release 1.12 or 1.13 format
