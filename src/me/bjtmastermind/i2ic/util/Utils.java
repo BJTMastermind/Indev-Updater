@@ -1,5 +1,7 @@
 package me.bjtmastermind.i2ic.util;
 
+import java.util.ArrayList;
+
 public class Utils {
 	public static int[] toXYZ(int pos) {
 		int x = pos % 1024;
@@ -20,5 +22,13 @@ public class Utils {
 	
 	public static int asInt(String s) {
 		return Integer.valueOf(s, 36);
+	}
+	
+	public static byte[] toByteArray(ArrayList<Byte> list) {
+		byte[] array = new byte[list.size()];
+		for(int i = 0; i < list.size(); i++) {
+			array[i] = list.get(i);
+		}
+		return array;
 	}
 }
