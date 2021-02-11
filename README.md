@@ -4,10 +4,10 @@
 
 ## Plan To Add / To Do
 
-- [ ] Convert Entities
-- [ ] Convert Tile Entities
+- [x] Convert Entities
+- [x] Convert Tile Entities
 - [ ] Create "BlockLight" Byte Array
-- [ ] Create "HeightMap" Byte Array
+- [x] Create "HeightMap" Byte Array
 - [ ] Create "SkyLight" Byte Array
 - [ ] Support for converting from Pre-Classic
 - [ ] Support for converting from all Classic varints
@@ -38,4 +38,5 @@ This Project Uses [Simple-NBT](https://github.com/BJTMastermind/simple-nbt) to r
 
 ### First Converted Indev World
 ![First Converted Indev World](https://user-images.githubusercontent.com/18742837/107288124-da7a9680-6a5a-11eb-9904-46df76eef457.png)
-
+### Working Tile Entity Conversion (All Indev Items in Containers Convert!)
+![Tile Entities Converting](https://user-images.githubusercontent.com/18742837/107709950-f2058980-6cbd-11eb-9c20-04918f029843.png)
