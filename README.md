@@ -2,7 +2,7 @@
 
   A Minecraft world converter that will allow you to convert your Indev worlds to Infdev                                                                                         
 
-## Plan To Add / To Do
+## Plan To Add / To Do (All may not be possible right away)
 
 - [x] Convert Entities
 - [x] Convert Tile Entities
