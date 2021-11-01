@@ -9,8 +9,8 @@
 - [ ] Create "BlockLight" Byte Array
 - [x] Create "HeightMap" Byte Array
 - [ ] Create "SkyLight" Byte Array
-- [ ] Support for converting from Pre-Classic
-- [ ] Support for converting from all Classic varints
+- [ ] <s>Support for converting from Pre-Classic</s> (Canceled)
+- [ ] <s>Support for converting from all Classic varints</s> (Canceled)
 - [ ] Support for converting to Release 1.12 or 1.13 format
 
 ## How To Use (UI)
