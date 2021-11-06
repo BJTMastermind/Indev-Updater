@@ -11,7 +11,8 @@
 - [ ] Create "SkyLight" Byte Array
 - [ ] <s>Support for converting from Pre-Classic</s> (Canceled)
 - [ ] <s>Support for converting from all Classic varints</s> (Canceled)
-- [ ] Support for converting to Release 1.12 or 1.13 format
+- [ ] Support for converting to Release 1.12.2 format
+- [ ] Support for converting to McRegion format
 
 ## How To Use (UI)
 
