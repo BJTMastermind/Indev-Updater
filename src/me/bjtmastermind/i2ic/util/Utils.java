@@ -31,4 +31,13 @@ public class Utils {
 		}
 		return array;
 	}
+	
+	public static int[] toChunkCoords(int x, int z) {
+		int chunkX = x / 16;
+		int chunkZ = z / 16;
+		int[] chunkXZ = new int[2];
+		chunkXZ[0] = chunkX;
+		chunkXZ[1] = chunkZ;
+		return chunkXZ;
+	}
 }
