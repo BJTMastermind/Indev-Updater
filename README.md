@@ -1,4 +1,5 @@
-# Indev To Infdev World Converter
+# Indev Updater
+  (Formerly none as Indev To Infdev World Converter)
 
   A Minecraft world converter that will allow you to convert your Indev worlds to Infdev                                                                                         
 
