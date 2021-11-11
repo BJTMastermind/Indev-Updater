@@ -31,7 +31,7 @@ Coming Soon.
 This project is to help minecrafters convert some of their oldest worlds to a version of the game that they can update to the newest version
 by the game its self with out having to do anything tricky with MCEdit.
 
-Currently this program can only be ran in a IDE as I have not added a UI yet once the base function of the program is complete I will add that.
+Currently this program can only be ran/compiled to a jar in a IDE where you can use the UI. Once I finish the block/skylight conversions I will release the pre-compiled jar file in a pre-release.
 
 This Project Uses [Simple-NBT](https://github.com/BJTMastermind/simple-nbt) to read and write files.
 
@@ -41,3 +41,5 @@ This Project Uses [Simple-NBT](https://github.com/BJTMastermind/simple-nbt) to r
 ![First Converted Indev World](https://user-images.githubusercontent.com/18742837/107288124-da7a9680-6a5a-11eb-9904-46df76eef457.png)
 ### Working Tile Entity Conversion (All Indev Items in Containers Convert!)
 ![Tile Entities Converting](https://user-images.githubusercontent.com/18742837/107709950-f2058980-6cbd-11eb-9c20-04918f029843.png)
+### First Look At GUI For The Program
+![Converter GUI](https://user-images.githubusercontent.com/18742837/141232792-4d5380b8-a0ce-4bfb-ae02-2739f95d5126.png)
