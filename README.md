@@ -1,17 +1,16 @@
+<img width="256" height="256" src=https://user-images.githubusercontent.com/18742837/170804119-37c0ec68-a9ec-4396-9133-a84ef2422f96.png>
+
 # Indev Updater
-  (Formerly none as Indev To Infdev World Converter)
 
-  A Minecraft world converter that will allow you to convert your Indev worlds to Infdev                                                                                         
+  A Minecraft world converter that will allow you to convert your Indev worlds to Infdev / Beta / 1.12.2
 
-## Plan To Add / To Do (All may not be possible right away)
+## Plan To Add / To Do
 
 - [x] Convert Entities
 - [x] Convert Tile Entities
 - [ ] Create "BlockLight" Byte Array
 - [x] Create "HeightMap" Byte Array
 - [ ] Create "SkyLight" Byte Array
-- [ ] <s>Support for converting from Pre-Classic</s> (Canceled)
-- [ ] <s>Support for converting from all Classic varints</s> (Canceled)
 - [ ] Support for converting to Release 1.12.2 format
 - [ ] Support for converting to McRegion format
 
@@ -25,12 +24,12 @@ Coming Soon.
 
 ## Minimum Java Version
 
-* Java 8 
+* Java 8
 
 ## About This Project
 
-This project is to help minecrafters convert some of their oldest worlds to a version of the game that they can update to the newest version
-by the game its self with out having to do anything tricky with MCEdit.
+This project is to help minecrafters convert some of their oldest worlds to a version of the game that they can manually update to the newest version
+by the game its self without having to do anything tricky with MCEdit.
 
 Currently this program can only be ran/compiled to a jar in a IDE where you can use the UI. Once I finish the block/skylight conversions I will release the pre-compiled jar file in a pre-release.
 
