@@ -9,7 +9,7 @@ public class CoordinateManipulation {
         return xyz;
     }
 
-    public static int toChunkCoord(int coord) {
-        return coord >> 4;
+    public static int toChunkCoord(int blockCoord) {
+        return blockCoord >> 4;
     }
 }
