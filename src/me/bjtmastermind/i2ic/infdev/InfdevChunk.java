@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import me.bjtmastermind.i2ic.indev.IndevLevel;
+import me.bjtmastermind.i2ic.utils.ArrayUtils;
 import me.bjtmastermind.i2ic.utils.Base36;
 import me.bjtmastermind.i2ic.utils.CoordinateManipulation;
 import me.bjtmastermind.i2ic.utils.IndevBlocks;
@@ -13,6 +14,8 @@ import me.bjtmastermind.nbt.tag.DoubleTag;
 import me.bjtmastermind.nbt.tag.FloatTag;
 import me.bjtmastermind.nbt.tag.ListTag;
 import me.bjtmastermind.nbt.tag.StringTag;
+import me.bjtmastermind.nibblearray.Half;
+import me.bjtmastermind.nibblearray.NibbleArray;
 
 class InfdevChunk {
     IndevLevel indevLevel;
@@ -25,7 +28,7 @@ class InfdevChunk {
     byte[] data;
     byte[] blockLight;
     byte[] skyLight;
-    byte[] heightMap = new byte[256];
+    byte[] heightMap;
     ListTag<CompoundTag> entities;
     ListTag<CompoundTag> tileEntities;
 
@@ -40,11 +43,11 @@ class InfdevChunk {
         this.xPos = chunkX;
         this.zPos = chunkZ;
         this.terrainPopulated = true;
-        this.lastUpdate = 200L;
+        this.lastUpdate = 0L;
         this.blocks = parseChunk(blockX, blockZ);
         this.data = parseData(blockX, blockZ);
-        this.blockLight = generateBlockLight(chunkX, chunkZ);
-        this.skyLight = generateSkyLight(chunkX, chunkZ);
+        this.blockLight = new byte[16384];
+        this.skyLight = new byte[16384];
         this.heightMap = generateHeightMap(blockX, blockZ);
         this.entities = parseEntities(chunkX, chunkZ);
         this.tileEntities = parseTileEntities(chunkX, chunkZ);
@@ -78,45 +81,31 @@ class InfdevChunk {
     private byte[] parseChunk(int blockX, int blockZ) {
         byte[] blocks = new byte[32768];
         int startY = (indevLevel.height > 128) ? 128 : 0;
-        int i = 0;
-        for (int x = blockX; x <= blockX + 15; x++) {
-            for (int z = blockZ; z <= blockZ + 15; z++) {
+        for (int x = blockX; x < blockX + 16; x++) {
+            for (int z = blockZ; z < blockZ + 16; z++) {
                 for (int y = startY; y < startY + 128; y++) {
                     if (y >= 0 && y <= indevLevel.height - 1) {
                         byte block = indevLevel.blocks[(y * indevLevel.length + z) * indevLevel.width + x];
+                        if (ArrayUtils.arrayContains(IndevBlocks.CLOTHS, (int) block)) {
+                            // Converts all Cloth colors to White Cloth (Wool)
+                            blocks[(y % 128) + ((z % 16) * 128 + ((x % 16) * 128 * 16))] = (byte) 35;
+                            break;
+                        }
+
                         switch(block) {
-                            case 21:
-                            case 22:
-                            case 23:
-                            case 24:
-                            case 25:
-                            case 26:
-                            case 27:
-                            case 28:
-                            case 29:
-                            case 30:
-                            case 31:
-                            case 32:
-                            case 33:
-                            case 34:
-                            case 36:
-                                // Converts all Cloth colors to White Cloth (Wool)
-                                blocks[i] = (byte) 35;
-                                break;
                             case 52:
-                                // Converts Infinite Water to Water Source
-                                blocks[i] = (byte) 9;
+                                // Converts Water Spawner to Water Source
+                                blocks[(y % 128) + ((z % 16) * 128 + ((x % 16) * 128 * 16))] = (byte) 9;
                                 break;
                             case 53:
-                                // Converts Infinite Lava to Lava Source
-                                blocks[i] = (byte) 11;
+                                // Converts Lava Spawner to Lava Source
+                                blocks[(y % 128) + ((z % 16) * 128 + ((x % 16) * 128 * 16))] = (byte) 11;
                                 break;
                             default:
-                                blocks[i] = (startY == 128 && y == 128) ? (byte) 7 : block;
+                                blocks[(y % 128) + ((z % 16) * 128 + ((x % 16) * 128 * 16))] = (startY == 128 && y == 128) ? (byte) 7 : block;
                                 break;
                         }
                     }
-                    i++;
                 }
             }
         }
@@ -124,61 +113,69 @@ class InfdevChunk {
     }
 
     private byte[] parseData(int blockX, int blockZ) {
-        byte[] data = new byte[16384];
-        return data;
+        NibbleArray data = new NibbleArray(16384);
+        NibbleArray indevData = new NibbleArray(indevLevel.data);
+        int startY = (indevLevel.height > 128) ? 128 : 0;
+        for (int x = blockX; x < blockX + 16; x++) {
+            for (int z = blockZ; z < blockZ + 16; z++) {
+                for (int y = startY; y < startY + 128; y++) {
+                    int index = (y * indevLevel.length + z) * indevLevel.width + x;
+                    int newIndex = (y % 128) + ((z % 16) * 128 + ((x % 16) * 128 * 16));
+
+                    int blockdata = indevData.get(index / 2, Half.HIGH);
+
+                    if (newIndex % 2 == 0) {
+                        data.set(newIndex / 2, Half.HIGH, blockdata);
+                    } else {
+                        data.set(newIndex / 2, Half.LOW, blockdata);
+                    }
+                }
+            }
+        }
+        return data.array();
     }
 
-    private byte[] generateBlockLight(int chunkX, int chunkZ) {
-        byte[] blockLight = new byte[16384];
-        return blockLight;
-    }
-
-    private byte[] generateSkyLight(int chunkX, int chunkZ) {
-        byte[] skyLight = new byte[16384];
-        return skyLight;
-    }
-
+    // TODO: Some how check if this is correct.
     private byte[] generateHeightMap(int blockX, int blockZ) {
         byte[] heightMap = new byte[256];
-        for(int realX = blockX, x = 0; realX <= blockX + 15; realX++) {
-            for(int realZ = blockZ, z = 0; realZ <= blockZ + 15; realZ++) {
+        for(int z = blockZ; z < blockZ + 16; z++) {
+            for(int x = blockX; x < blockX + 16; x++) {
                 for(int y = indevLevel.height - 1; y >= 0; y--) {
-                    byte block = indevLevel.blocks[(y * indevLevel.length + realZ) * indevLevel.width + realX];
+                    byte block = indevLevel.blocks[(y * indevLevel.length + z) * indevLevel.width + x];
                     if (block != (byte) IndevBlocks.AIR) {
-                        heightMap[(16 * z) + x] = (byte) y;
+                        heightMap[(16 * (x % 16)) + (z % 16)] = (byte) y;
                         break;
                     }
                 }
-                z++;
             }
-            x++;
         }
         return heightMap;
     }
 
-    // TODO: Check to see if this works
     private ListTag<CompoundTag> parseEntities(int chunkX, int chunkZ) {
         ListTag<CompoundTag> entities = new ListTag<>();
         for (CompoundTag entity : indevLevel.entities) {
             if (!entity.getStringTag("id").equals(new StringTag("LocalPlayer"))) {
-                ListTag<FloatTag> entityPos = (ListTag<FloatTag>) entity.getListTag("Pos").asFloatTagList();
-                ListTag<FloatTag> entityMotion = (ListTag<FloatTag>) entity.getListTag("Motion").asFloatTagList();
-                if ((int) (entityPos.get(0).asFloat()) / 16f == chunkX && (int) (entityPos.get(2).asFloat()) / 16f == chunkZ) {
+                ListTag<FloatTag> entityPos = entity.getListTag("Pos").asFloatTagList();
+                ListTag<FloatTag> entityMotion = entity.getListTag("Motion").asFloatTagList();
+                if ((int) (entityPos.get(0).asFloat() / 16f) == chunkX && (int) (entityPos.get(2).asFloat() / 16f) == chunkZ) {
+                    CompoundTag updatedEntity = entity.clone();
+
                     ListTag<DoubleTag> newPos = new ListTag<>();
                     newPos.add((double) entityPos.get(0).asFloat());
                     newPos.add((double) entityPos.get(1).asFloat());
                     newPos.add((double) entityPos.get(2).asFloat());
-                    entity.remove("Pos");
-                    entity.put("Pos", newPos);
+                    updatedEntity.remove("Pos");
+                    updatedEntity.put("Pos", newPos);
 
                     ListTag<DoubleTag> newMotion = new ListTag<>();
                     newMotion.add((double) entityMotion.get(0).asFloat());
                     newMotion.add((double) entityMotion.get(1).asFloat());
                     newMotion.add((double) entityMotion.get(2).asFloat());
-                    entity.remove("Motion");
-                    entity.put("Motion", newMotion);
+                    updatedEntity.remove("Motion");
+                    updatedEntity.put("Motion", newMotion);
 
-                    entities.add(entity);
+                    entities.add(updatedEntity);
                 }
             }
         }
