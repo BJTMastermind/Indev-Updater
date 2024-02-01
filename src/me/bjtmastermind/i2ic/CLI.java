@@ -53,11 +53,11 @@ public class CLI {
             IndevLevel indevLevel = new IndevLevel(new File(inFile));
 
             if(outType.equals("infdev")) {
-                System.out.println("To Infdev");
-
                 InfdevWorld infdevWorld = new InfdevWorld(indevLevel);
                 infdevWorld.generateChunkFiles();
                 infdevWorld.generateLevelFile();
+                // infdevWorld.recalculateLighting();
+                infdevWorld.calculateWorldSize(new File(indevLevel.file.getParent()+File.separator+"World5"));
 
                 System.out.println("Conversion of " + new File(inFile).getName() + " Complete!");
             } else if(outType.equals("beta")) {
