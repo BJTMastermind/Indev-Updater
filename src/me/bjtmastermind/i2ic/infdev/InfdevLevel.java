@@ -41,8 +41,8 @@ class InfdevLevel {
 
         for (CompoundTag entity : indevLevel.entities) {
             if (entity.getStringTag("id").equals(new StringTag("LocalPlayer"))) {
-                ListTag<FloatTag> playerPos = (ListTag<FloatTag>) entity.getListTag("Pos").asFloatTagList();
-                ListTag<FloatTag> playerMotion = (ListTag<FloatTag>) entity.getListTag("Motion").asFloatTagList();
+                ListTag<FloatTag> playerPos = entity.getListTag("Pos").asFloatTagList();
+                ListTag<FloatTag> playerMotion = entity.getListTag("Motion").asFloatTagList();
 
                 ListTag<DoubleTag> newPlayerPos = new ListTag<>();
                 newPlayerPos.add((double) playerPos.get(0).asFloat());
@@ -58,8 +58,9 @@ class InfdevLevel {
                 entity.remove("Motion");
                 entity.put("Motion", newPlayerMotion);
 
+                entity.remove("id");
+
                 this.player = entity;
-                this.player.remove("id");
                 break;
             }
         }
@@ -81,22 +82,4 @@ class InfdevLevel {
 
         NBTUtil.write(root, worldRoot+File.separator+"level.dat");
     }
-
-    // Fix to give correct file size of world in MB
-    /*private static long getDirSize(File dir) {
-        long size = 0;
-        File[] contents = dir.listFiles();
-
-        for(int i = 0; i < contents.length; i++) {
-            if(contents[i].isFile()) {
-                System.out.println(contents[i]);
-                size += contents[i].length();
-            } else {
-                System.out.println(contents[i]);
-                getDirSize(contents[i]);
-            }
-        }
-        System.out.println(size);
-        return size / (1024 * 1024);
-    }*/
 }
