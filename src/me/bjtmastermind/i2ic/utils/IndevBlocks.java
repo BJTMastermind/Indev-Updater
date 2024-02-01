@@ -64,4 +64,32 @@ public class IndevBlocks {
     public static final int FARMLAND = 60;
     public static final int FURNACE = 61;
     public static final int LIT_FURNACE = 62;
+
+    public static final int[] CLOTHS = {
+        RED_CLOTH,
+        ORANGE_CLOTH,
+        YELLOW_CLOTH,
+        CHARTREUSE_CLOTH,
+        GREEN_CLOTH,
+        SPRING_GREEN_CLOTH,
+        CYAN_CLOTH,
+        CAPRI_CLOTH,
+        ULTRAMARINE_CLOTH,
+        VIOLET_CLOTH,
+        PURPLE_CLOTH,
+        MAGENTA_CLOTH,
+        ROSE_CLOTH,
+        DARK_GRAY_CLOTH,
+        LIGHT_GRAY_CLOTH,
+        WHITE_CLOTH
+    };
+
+    public static final int[] LIGHT_EMITTING_BLOCKS = {
+        FLOWING_LAVA, // Light level 15
+        LAVA, // Light level 15
+        BROWN_MUSHROOM, // Light level 1
+        TORCH, // Light level 14
+        FIRE, // Light level 15
+        LIT_FURNACE // Light level 13
+    };
 }
