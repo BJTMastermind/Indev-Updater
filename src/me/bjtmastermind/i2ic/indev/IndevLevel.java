@@ -65,13 +65,13 @@ public class IndevLevel {
         this.width = map.getShort("Width");
         this.length = map.getShort("Length");
         this.height = map.getShort("Height");
-        ListTag<ShortTag> spawn = (ListTag<ShortTag>) map.getListTag("Spawn").asShortTagList();
+        ListTag<ShortTag> spawn = map.getListTag("Spawn").asShortTagList();
         this.spawn[0] = spawn.get(0).valueToShort();
         this.spawn[1] = spawn.get(1).valueToShort();
         this.spawn[2] = spawn.get(2).valueToShort();
         this.blocks = map.getByteArrayTag("Blocks").getValue();
         this.data = map.getByteArrayTag("Data").getValue();
-        this.entities = (ListTag<CompoundTag>) mclevel.getListTag("Entities").asCompoundTagList();
-        this.tileEntities = (ListTag<CompoundTag>) mclevel.getListTag("TileEntities").asCompoundTagList();
+        this.entities = mclevel.getListTag("Entities").asCompoundTagList();
+        this.tileEntities = mclevel.getListTag("TileEntities").asCompoundTagList();
     }
 }
