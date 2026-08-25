@@ -1,3 +1,7 @@
+> [!warning]
+> This project has been migrated to Codeberg and will no longer be updated here.<br>
+> Visit the projects Codeberg repository at: https://codeberg.org/VoxelBill/Indev-Updater
+
 <img width="256" height="256" src=https://user-images.githubusercontent.com/18742837/170804119-37c0ec68-a9ec-4396-9133-a84ef2422f96.png>
 
 # Indev Updater
